@@ -1,12 +1,9 @@
 const path = require('path');
-
-const { app, BrowserView, BrowserWindow, ipcMain } = require('electron');
+const url = require('url');
+const { app, BrowserView, BrowserWindow } = require('electron');
 app.commandLine.appendSwitch('disable-http-cache');
 app.commandLine.appendSwitch('v', 0);
 app.commandLine.appendSwitch('vmodule', 'console=0');
-
-// Disable security warnings for now
-process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
 
 let win;
 let view;
@@ -44,11 +41,19 @@ function start () {
     win.setSheetOffset(40);
   }
 
-  view.webContents.loadFile(path.resolve(__dirname, 'test.html'));
-  win.loadFile(path.resolve(__dirname, 'welcome.html'));
+  view.webContents.loadURL(url.format({
+    pathname: path.join(__dirname, 'test.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'welcome.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
   win.webContents.openDevTools({ mode: 'detach' });
   win.once('ready-to-show', () => win.show());
-};
+}
 
 app.once('ready', () => {
   start();
