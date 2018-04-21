@@ -1,6 +1,6 @@
 const path = require('path');
 const url = require('url');
-const { app, BrowserView, BrowserWindow } = require('electron');
+const { app, BrowserView, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 app.commandLine.appendSwitch('disable-http-cache');
 app.commandLine.appendSwitch('v', 0);
 app.commandLine.appendSwitch('vmodule', 'console=0');
@@ -29,12 +29,6 @@ function start () {
   });
   win.setBrowserView(view);
   win.on('resize', () => updateViewBounds());
-  win.on('blur', () => {
-    console.log('blur');
-  });
-  win.on('focus', () => {
-    console.log('focus');
-  });
   updateViewBounds();
 
   if (process.platform === 'darwin') {
@@ -53,6 +47,10 @@ function start () {
   }));
   win.webContents.openDevTools({ mode: 'detach' });
   win.once('ready-to-show', () => win.show());
+
+  ipcMain.on('focus-content', (ev, data) => {
+    ev.sender.focus();
+  });
 }
 
 app.once('ready', () => {

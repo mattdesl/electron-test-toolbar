@@ -42,10 +42,10 @@
       This should be hidden by the view.
     </div>
   </main>
-
   <script>
-      // document.querySelector('input').addEventListener('click', () => {
-      //   console.log('input', document.querySelector('input'));
-      // });
-    </script>
+    const { ipcRenderer } = require('electron');
+    window.addEventListener('click', ev => {
+      ipcRenderer.send('focus-content');
+    });
+  </script>
 </body>

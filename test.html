@@ -23,5 +23,12 @@
     </style>
     <main class="app">
       Test App View
+      <input type="text" value="3" />
     </main>
+    <script>
+        const { ipcRenderer } = require('electron');
+        window.addEventListener('click', ev => {
+          ipcRenderer.send('focus-content');
+        });
+      </script>
   </body>
