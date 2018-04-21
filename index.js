@@ -1,6 +1,6 @@
 const path = require('path');
 const url = require('url');
-const { app, BrowserView, BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { app, BrowserView, BrowserWindow } = require('electron');
 app.commandLine.appendSwitch('disable-http-cache');
 app.commandLine.appendSwitch('v', 0);
 app.commandLine.appendSwitch('vmodule', 'console=0');
@@ -24,7 +24,7 @@ function start () {
   };
   view = new BrowserView({
     webPreferences: {
-      nodeIntegration: false
+      nodeIntegration: true
     }
   });
   win.setBrowserView(view);
@@ -45,11 +45,10 @@ function start () {
     protocol: 'file:',
     slashes: true
   }));
-  win.webContents.openDevTools({ mode: 'detach' });
-  win.once('ready-to-show', () => win.show());
-
-  ipcMain.on('focus-content', (ev, data) => {
-    ev.sender.focus();
+  // win.webContents.openDevTools({ mode: 'detach' });
+  view.webContents.openDevTools({ mode: 'bottom' });
+  view.webContents.once('devtools-opened', () => {
+    win.show();
   });
 }
 

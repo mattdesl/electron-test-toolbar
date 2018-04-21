@@ -1,3 +1,7 @@
+<html>
+<head>
+  <title>test</title>
+</head>
 <body>
     <style>
     html {
@@ -26,9 +30,8 @@
       <input type="text" value="3" />
     </main>
     <script>
-        const { ipcRenderer } = require('electron');
-        window.addEventListener('click', ev => {
-          ipcRenderer.send('focus-content');
-        });
-      </script>
+      const remote = require('electron').remote;
+      window.addEventListener('click', () => remote.getCurrentWebContents().focus());
+    </script>
   </body>
+  </html>
