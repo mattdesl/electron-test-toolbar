@@ -1,0 +1,51 @@
+<body>
+  <style>
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  .title {
+    pointer-events: none;
+    user-select: none;
+  }
+  nav.toolbar {
+    -webkit-app-region: drag;
+    height: 40px;
+    width: 100%;
+    background: blue;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  main.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 40px);
+  }
+  </style>
+  <nav class="toolbar">
+    <span class="title">welcome screen</span>
+    <input type="text" value="3" />
+  </nav>
+  <main class="welcome">
+    <div>
+      This should be hidden by the view.
+    </div>
+  </main>
+
+  <script>
+      // document.querySelector('input').addEventListener('click', () => {
+      //   console.log('input', document.querySelector('input'));
+      // });
+    </script>
+</body>

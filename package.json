@@ -1,0 +1,15 @@
+{
+  "name": "electron-test-toolbar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "keywords": [],
+  "author": "Matt DesLauriers <dave.des@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^2.0.0-beta.7"
+  }
+}
