@@ -5,6 +5,8 @@ app.commandLine.appendSwitch('disable-http-cache');
 app.commandLine.appendSwitch('v', 0);
 app.commandLine.appendSwitch('vmodule', 'console=0');
 
+const preload = require.resolve('./preload.js');
+
 let win;
 let view;
 function start () {
@@ -13,6 +15,7 @@ function start () {
     titleBarStyle: isHighSierra ? null : 'hiddenInset',
     show: false,
     webPreferences: {
+      preload,
       nodeIntegration: true,
       nodeIntegrationInWorker: true
     }
@@ -24,7 +27,8 @@ function start () {
   };
   view = new BrowserView({
     webPreferences: {
-      nodeIntegration: true
+      preload,
+      nodeIntegration: false
     }
   });
   win.setBrowserView(view);
